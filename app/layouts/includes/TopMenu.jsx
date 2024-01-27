@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { BsChevronDown } from "react-icons/bs";
+import { AiOutlineShoppingCart } from "react-icons/ai";
 
 export default function TopMenu() {
     return (
@@ -37,6 +38,21 @@ export default function TopMenu() {
                     </li>
                     <li className="px-3 hover:underline hover:underline-offset-4 cursor-pointer">Daily Deals</li>
                     <li className="px-3 hover:underline hover:underline-offset-4 cursor-pointer">Help & Contact</li>
+                </ul>
+                <ul id="TopMenuRight"
+                    className="flex items-center text-[11px] text-[#333333] px-2 h-8">
+                    <li className="flex items-center gap-2 px-3 hover:underline hover:underline-offset-4 cursor-pointer">
+                        <img width={32} src="/assets/india.png" alt="india-logo" />
+                        Ship to
+                    </li>
+                    <li className="px-3 hover:underline hover:underline-offset-4 cursor-pointer">
+                        <div className="relative">
+                            <AiOutlineShoppingCart size={22} />
+                            <div className="absolute bg-red-600 text-[10px] w-[14px] h-[14px]  rounded-full -top-[2px] -right-[5px] text-white">
+                                <div className="flex items-center justify-center -mt-[1px]">0</div>
+                            </div>
+                        </div>
+                    </li>
                 </ul>
             </div>
         </div>
