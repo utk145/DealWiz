@@ -1,9 +1,15 @@
-import Image from 'next/image'
+"use client"
+
+import MainLayout from "./layouts/MainLayout"
+
+
 
 export default function Home() {
   return (
     <>
-      <h1 className='text-orange-400'>Basic initialization</h1>
+      <MainLayout>
+        heyy
+      </MainLayout>
     </>
   )
 }
