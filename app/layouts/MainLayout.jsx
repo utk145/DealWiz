@@ -1,4 +1,5 @@
 "use client"
+import Footer from './includes/Footer'
 import MainHeader from './includes/MainHeader'
 import SubMenu from './includes/SubMenu'
 import TopMenu from './includes/TopMenu'
@@ -8,9 +9,13 @@ const MainLayout = ({ children }) => {
         <>
             <div id='MainLayout' className='min-w-[1050px] max-w-[1300px] mx-auto'>
                 <div className="">
-                    <TopMenu/>
-                    <MainHeader/>
-                    <SubMenu/>
+                    <TopMenu />
+                    <MainHeader />
+                    <SubMenu />
+                </div>
+                <div>{children}</div>
+                <div>
+                    <Footer />
                 </div>
             </div>
         </>

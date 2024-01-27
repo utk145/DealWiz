@@ -8,7 +8,11 @@ export default function Home() {
   return (
     <>
       <MainLayout>
-        heyy
+        {/* // this is the area where all the mid parts are gonna be there */}
+
+      
+
+
       </MainLayout>
     </>
   )
