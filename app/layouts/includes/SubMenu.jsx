@@ -58,7 +58,7 @@ export default function SubMenu() {
                 <ul id="SubMenuLeft"
                     className="flex items-center text-[13px] text-[#333333] px-2 h-8" >
                     {menuItems && menuItems.map((item) => (
-                        <li className="px-3 hover:underline hover:underline-offset-2" key={item.id}>{item.name}</li>
+                        <li className="px-3 hover:underline hover:underline-offset-2 cursor-pointer" key={item.id}>{item.name}</li>
                     ))}
                 </ul>
             </div>
