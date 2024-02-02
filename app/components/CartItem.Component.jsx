@@ -10,7 +10,7 @@ export default function CartItem({ product }) {
 
                 <div className="overflow-hidden pl-2 w-full">
                     <div className="flex items-center justify-between w-full">
-                        <div className="flex items-center font-semibold justify-between w-[400px] text-[16px] underline">
+                        <div className="flex items-center font-semibold justify-between w-[400px] text-[16px] underline underline-offset-4">
                             {product?.title}
                         </div>
                         <div className="font-bold text-lg">
