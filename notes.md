@@ -4,3 +4,5 @@
 - https://tutorend.com/tutorials/react-toastify-in-next-js-react-js
 
 - https://react-icons.github.io/react-icons/
+
+- https://supabase.com/docs/guides/auth/auth-helpers/auth-ui
