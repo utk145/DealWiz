@@ -3,8 +3,13 @@
 import Link from "next/link";
 import { BsChevronDown } from "react-icons/bs";
 import { AiOutlineShoppingCart } from "react-icons/ai";
+import { useUser } from "@/app/context/user";
 
 export default function TopMenu() {
+
+    const user = useUser();
+    console.log(user);
+
     return (
         <div id="TopMenu" className="border-b">
             <div className="flex items-center justify-between w-full mx-auto max-w-[1200px]">

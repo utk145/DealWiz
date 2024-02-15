@@ -8,6 +8,7 @@ export default function ProductComponent({ product }) {
         <>
             <Link
                 href={`/product/${product?.id}`}
+                key={product?.id}
                 className='max-w-[220px] p-1.5 border border-gray-50 hover:border-gray-200 hover:shadow-xl bg-gray-100 rounded-md mx-auto  transition-all'
             >
                 {product?.imageUrl ? <img className="rounded-md cursor-pointer" src={product.imageUrl + '/190'} /> : null}
