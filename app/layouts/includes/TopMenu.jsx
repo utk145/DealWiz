@@ -4,11 +4,35 @@ import Link from "next/link";
 import { BsChevronDown } from "react-icons/bs";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { useUser } from "@/app/context/user";
+import { useState } from "react";
 
 export default function TopMenu() {
 
     const user = useUser();
-    console.log(user);
+    // console.log(user);
+
+    const [isMenu, setIsMenu] = useState(false)
+
+    const isLoggedIn = () => {
+        if (user && user?.id) {
+            return (
+                <button
+                    className="flex items-center justify-center gap-2 hover:underline hover:underline-offset-4 cursor-pointer"
+                    onClick={() => !isMenu ? setIsMenu(true) : setIsMenu(false)}
+                >
+                    <div>Hi, {user?.name}</div>
+                    <BsChevronDown />
+                </button>
+            )
+        }
+
+        return (
+            <Link href={"/auth"} className="flex items-center gap-2 hover:underline hover:underline-offset-4 cursor-pointer">
+                <div>Login</div>
+                <BsChevronDown />
+            </Link>
+        )
+    }
 
     return (
         <div id="TopMenu" className="border-b">
@@ -18,15 +42,15 @@ export default function TopMenu() {
                 >
                     <li className="relative px-3">
 
-                        <Link href={"/auth"} className="flex items-center gap-2 hover:underline hover:underline-offset-4 cursor-pointer">
-                            <div>Login</div>
-                            <BsChevronDown />
-                        </Link>
-                        <div id="AuthDropdown" className=" hidden absolute bg-white w-[200px] text-[#333333] z-40 top-[20px] left-0 border shadow-lg">
+                        {isLoggedIn()}
+
+                        <div id="AuthDropdown"
+                            className={` ${isMenu ? 'visible' : 'hidden'} absolute bg-white w-[200px] text-[#333333] z-40 top-[20px] left-0 border shadow-lg`}
+                        >
 
                             <div className="flex items-center justify-start gap-1 p-3">
-                                <img src="https://avatars.githubusercontent.com/u/122993091?v=4" alt="logo" width={50} />
-                                <div className="font-bold text-[13px]">Shera</div>
+                                <img src={user?.picture || 'https://media.istockphoto.com/id/1337144146/vector/default-avatar-profile-icon-vector.jpg?s=612x612&w=0&k=20&c=BIbFwuv7FxTWvh5S3vB6bkT0Qv8Vn8N5Ffseq84ClGI='} alt="logo" width={50} />
+                                <div className="font-bold text-[13px]">{user?.name}</div>
                             </div>
 
                             <div className="border-b" />
@@ -35,7 +59,12 @@ export default function TopMenu() {
                                 <li className="text-[11px] py-2 px-4 w-full hover:underline hover:underline-offset-1 cursor-pointer text-blue-500 hover:text-blue-700">
                                     <Link href={"/orders"}>My Orders</Link>
                                 </li>
-                                <li className="text-[11px] py-2 px-4 w-full hover:underline hover:underline-offset-1 cursor-pointer text-red-500 hover:text-red-700">
+                                <li className="text-[11px] py-2 px-4 w-full hover:underline hover:underline-offset-1 cursor-pointer text-red-500 hover:text-red-700"
+                                    onClick={() => {
+                                        user.signOut();
+                                        setIsMenu()
+                                    }}
+                                >
                                     Sign Out
                                 </li>
                             </ul>
