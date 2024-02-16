@@ -1,7 +1,9 @@
 "use client";
 
 import SimilarProducts from "@/app/components/SimilarProducts.Component";
+import { useCart } from "@/app/context/cart";
 import MainLayout from "@/app/layouts/MainLayout";
+import { toast } from "react-toastify";
 
 const product = {
     id: 1,
@@ -13,6 +15,9 @@ const product = {
 
 
 export default function Product({ params }) {
+
+    const cart = useCart()
+
     return (
         <>
             <MainLayout>
@@ -49,7 +54,19 @@ export default function Product({ params }) {
                                                 : null
                                         }
                                     </div>}
-                                    <button className="text-white px-20 py-2 rounded-full cursor-pointer bg-[#3498c9]">Add to Cart</button>
+                                    <button
+                                        onClick={() => {
+                                            if (cart.isItemAdded) {
+                                                cart.removeFromCart(product);
+                                                toast.info("Removed from cart", { autoClose: 3000 })
+                                            }else{
+                                                cart.addToCart(product);
+                                                toast.info("Added to cart", { autoClose: 3000 })
+                                            }
+                                        }}
+                                        className={`text-white px-20 py-2 rounded-full cursor-pointer bg-[#3498c9] ${cart.isItemAdded ? 'bg-[#e9a321] hover:bg-[#bf851a]' : 'bg-[#3498c9] hover:bg-[#0054a0]'} `}>
+                                        {cart.isItemAdded ? "Remove from Cart" : "Add to Cart"}
+                                    </button>
                                 </div>
                             </div>
                             <div className="border-b-2 py-1" />
@@ -62,7 +79,7 @@ export default function Product({ params }) {
                     </div>
                 </div>
 
-                 <SimilarProducts/>                       
+                <SimilarProducts />
 
             </MainLayout>
         </>

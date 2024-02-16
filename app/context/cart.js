@@ -25,7 +25,7 @@ const Provider = ({ children }) => {
         }
         cart.push(product);
         localStorage.setItem("cart", JSON.stringify(cart));
-        isItemAdded(product)
+        isItemAddedToCart(product)
         router.refresh()
     };
 
@@ -37,7 +37,7 @@ const Provider = ({ children }) => {
 
         cart = cart.filter(item => item.id !== product.id)
         localStorage.setItem("cart", JSON.stringify(cart))
-        isItemAdded(product)
+        isItemAddedToCart(product)
         router.refresh()
     };
 
