@@ -8,6 +8,8 @@ import { useRouter } from "next/navigation"
 import { useUser } from "../context/user"
 import useIsLoading from "../hooks/useIsLoading"
 import useUserAddress from "../hooks/useUserAddress"
+import { toast } from "react-toastify"
+import useCreateAddress from "../hooks/useCreateAddress"
 
 export default function AddressPage() {
 
@@ -23,10 +25,7 @@ export default function AddressPage() {
     const [isUpdatingAddress, setIsUpdatingAddress] = useState(false)
     const [error, setError] = useState({})
 
-    const submit = () => {
-        console.log("Logging..");
-    };
-
+   
     const showError = (type) => {
         if (Object.entries(error).length > 0 && error?.type === type) {
             return error.message
@@ -65,6 +64,77 @@ export default function AddressPage() {
         setCountry(result.country)
     };
 
+    const validate = () => {
+        setError({});
+        let isError = false;
+
+        if (!name) {
+            setError({
+                type: "name",
+                message: "A name is required"
+            });
+            isError = true;
+        } else if (!address) {
+            setError({
+                type: 'address',
+                message: 'An address is required'
+            })
+            isError = true
+        } else if (!zipcode) {
+            setError({
+                type: 'zipcode',
+                message: 'A zipcode is required'
+            })
+            isError = true
+        } else if (!city) {
+            setError({
+                type: 'city',
+                message: 'A city is required'
+            })
+            isError = true
+        } else if (!country) {
+            setError({
+                type: 'country',
+                message: 'A country is required'
+            })
+            isError = true
+        }
+        return isError;
+    };
+
+    const submit = async (event) => {
+        event.preventDefault();
+        let isError = validate()
+
+        if (isError) {
+            toast.error(error.message, { autoClose: 3000 })
+            return
+        }
+
+        try {
+            setIsUpdatingAddress(true)
+
+            const response = await useCreateAddress({
+                addressId,
+                name,
+                address,
+                zipcode,
+                city,
+                country
+            })
+
+            setTheCurrentAddress(response)
+            setIsUpdatingAddress(false)
+
+            toast.success('Address updated!', { autoClose: 3000 })
+
+            router.push('/checkout')
+        } catch (error) {
+            setIsUpdatingAddress(false)
+            console.log(error)
+            alert(error)
+        }
+    }
 
     return (
         <>
