@@ -10,6 +10,7 @@ import useIsLoading from "../hooks/useIsLoading"
 import useUserAddress from "../hooks/useUserAddress"
 import { toast } from "react-toastify"
 import useCreateAddress from "../hooks/useCreateAddress"
+import ClientOnly from "../components/ClientOnly.Component"
 
 export default function AddressPage() {
 
@@ -25,7 +26,7 @@ export default function AddressPage() {
     const [isUpdatingAddress, setIsUpdatingAddress] = useState(false)
     const [error, setError] = useState({})
 
-   
+
     const showError = (type) => {
         if (Object.entries(error).length > 0 && error?.type === type) {
             return error.message
@@ -149,53 +150,63 @@ export default function AddressPage() {
 
                         <form onSubmit={submit}>
                             <div className="mb-4">
-                                <TextInput
-                                    className="w-full"
-                                    string={name}
-                                    placeholder="Name"
-                                    onUpdate={setName}
-                                    error={showError('name')}
-                                />
+                                <ClientOnly>
+                                    <TextInput
+                                        className="w-full"
+                                        string={name}
+                                        placeholder="Name"
+                                        onUpdate={setName}
+                                        error={showError('name')}
+                                    />
+                                </ClientOnly>
                             </div>
 
                             <div className="mb-4">
-                                <TextInput
-                                    className="w-full"
-                                    string={address}
-                                    placeholder="Address"
-                                    onUpdate={setAddress}
-                                    error={showError('address')}
-                                />
+                                <ClientOnly>
+                                    <TextInput
+                                        className="w-full"
+                                        string={address}
+                                        placeholder="Address"
+                                        onUpdate={setAddress}
+                                        error={showError('address')}
+                                    />
+                                </ClientOnly>
                             </div>
 
                             <div className="mb-4">
-                                <TextInput
-                                    className="w-full mt-2"
-                                    string={zipcode}
-                                    placeholder="Zip Code"
-                                    onUpdate={setZipcode}
-                                    error={showError('zipcode')}
-                                />
+                                <ClientOnly>
+                                    <TextInput
+                                        className="w-full mt-2"
+                                        string={zipcode}
+                                        placeholder="Zip Code"
+                                        onUpdate={setZipcode}
+                                        error={showError('zipcode')}
+                                    />
+                                </ClientOnly>
                             </div>
 
                             <div className="mb-4">
-                                <TextInput
-                                    className="w-full mt-2"
-                                    string={city}
-                                    placeholder="City"
-                                    onUpdate={setCity}
-                                    error={showError('city')}
-                                />
+                                <ClientOnly>
+                                    <TextInput
+                                        className="w-full mt-2"
+                                        string={city}
+                                        placeholder="City"
+                                        onUpdate={setCity}
+                                        error={showError('city')}
+                                    />
+                                </ClientOnly>
                             </div>
 
                             <div>
-                                <TextInput
-                                    className="w-full mt-2"
-                                    string={country}
-                                    placeholder="Country"
-                                    onUpdate={setCountry}
-                                    error={showError('country')}
-                                />
+                                <ClientOnly>
+                                    <TextInput
+                                        className="w-full mt-2"
+                                        string={country}
+                                        placeholder="Country"
+                                        onUpdate={setCountry}
+                                        error={showError('country')}
+                                    />
+                                </ClientOnly>
                             </div>
 
                             <button
