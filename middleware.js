@@ -10,7 +10,7 @@ export async function middleware(req) {
     // if we have a session which means someone has loggedIn 
     const { data } = await supabase.auth.getSession();
 
-    if (data?.session && req.nextUrl.pathname.startswith("/auth")) {
+    if (data?.session && req.nextUrl.pathname.startsWith("/auth")) {
         // we dont want them to go there
         return NextResponse.redirect(new URL('/', req.url))
     };

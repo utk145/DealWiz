@@ -1,11 +1,18 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import MainLayout from "../layouts/MainLayout"
 import { AiOutlineLoading3Quarters } from "react-icons/ai"
 import TextInput from "../components/TextInput.Compoent"
+import { useRouter } from "next/navigation"
+import { useUser } from "../context/user"
+import useIsLoading from "../hooks/useIsLoading"
+import useUserAddress from "../hooks/useUserAddress"
 
 export default function AddressPage() {
+
+    const router = useRouter()
+    const { user } = useUser()
 
     const [addressId, setAddressId] = useState(null)
     const [name, setName] = useState('')
@@ -21,8 +28,43 @@ export default function AddressPage() {
     };
 
     const showError = (type) => {
+        if (Object.entries(error).length > 0 && error?.type === type) {
+            return error.message
+        };
         return ''
     }
+
+    const getAddres = async () => {
+        if (user?.id === null || user?.id === undefined) {
+            useIsLoading(false);
+            return;
+        };
+
+        const response = await useUserAddress()
+        if (response) {
+            setTheCurrentAddress(response);
+            useIsLoading(false);
+            return;
+        }
+
+        useIsLoading(false);
+
+    };
+
+    useEffect(() => {
+        useIsLoading(true);
+        getAddres();
+    }, [user])
+
+    const setTheCurrentAddress = (result) => {
+        setAddressId(result.id)
+        setName(result.name)
+        setAddress(result.address)
+        setZipcode(result.zipcode)
+        setCity(result.city)
+        setCountry(result.country)
+    };
+
 
     return (
         <>
