@@ -6,9 +6,10 @@ import { AiOutlineShoppingCart } from "react-icons/ai";
 import { useUser } from "@/app/context/user";
 import { useState } from "react";
 import { useCart } from "@/app/context/cart";
+import { useRouter } from "next/navigation";
 
 export default function TopMenu() {
-
+    const router = useRouter()
     const cart = useCart();
 
     const user = useUser();
@@ -83,7 +84,7 @@ export default function TopMenu() {
                         Ship to
                     </li>
                     <li className="px-3 hover:underline hover:underline-offset-4 cursor-pointer">
-                        <div className="relative">
+                        <div className="relative" onClick={() => router.push('/cart')}>
                             <AiOutlineShoppingCart size={22} />
 
                             {cart.cartCount() > 0 &&
