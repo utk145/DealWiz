@@ -4,27 +4,60 @@ import Link from "next/link"
 import MainLayout from "../layouts/MainLayout"
 import { CiDeliveryTruck } from "react-icons/ci"
 import moment from "moment"
-const orders = [
-    {
-        id: 1,
-        stripe_id: "327863294",
-        name: "Vaali Anasot",
-        address: "864 Spring St NW, United States",
-        zipcode: "65134",
-        city: "nvsland",
-        country: "Anagreen",
-        total: 7409,
-        orderItem: [
-            {
-                id: 1,
-                title: 'Product Title',
-                imageUrl: 'https://picsum.photos/id/7'
-            }
-        ]
-    }
-]
+import { useUser } from "../context/user"
+import { toast } from "react-toastify"
+import useIsLoading from "../hooks/useIsLoading"
+import { useState, useEffect } from "react"
+// const orders = [
+//     {
+//         id: 1,
+//         stripe_id: "327863294",
+//         name: "Vaali Anasot",
+//         address: "864 Spring St NW, United States",
+//         zipcode: "65134",
+//         city: "nvsland",
+//         country: "Anagreen",
+//         total: 7409,
+//         orderItem: [
+//             {
+//                 id: 1,
+//                 title: 'Product Title',
+//                 imageUrl: 'https://picsum.photos/id/7'
+//             }
+//         ]
+//     }
+// ]
+
+
 
 export default function OrdersPage() {
+
+
+    const user = useUser();
+    const [orders, setOrders] = useState([]);
+
+    const getOrders = async () => {
+        try {
+            if (!user && !user?.id)
+                return
+
+            const resp = await fetch('/api/orders');
+            const data = await resp.json();
+            setOrders(data);
+            useIsLoading(false);
+
+        } catch (error) {
+            toast.error("Something went wrong fetching orders", { autoClose: 3000 });
+            useIsLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        useIsLoading(true);
+        getOrders();
+    }, [user])
+
+
     return (
         <>
             <MainLayout>
@@ -74,10 +107,10 @@ export default function OrdersPage() {
                                             <div key={item?.id} className="flex items-center">
                                                 <Link
                                                     className="py-1 hover:underline hover:underline-offset-4 text-blue-500 font-bold"
-                                                    href={`/product/${item?.id}`}
+                                                    href={`/product/${item?.product_id}`}
                                                 >
-                                                    <img className="rounded" width="120" src={item?.imageUrl + '/120'} />
-                                                    {item?.title}
+                                                    <img className="rounded" width="120" src={item?.product.imageUrl + '/120'} />
+                                                    {item?.product.title}
                                                 </Link>
                                             </div>
                                         ))}
