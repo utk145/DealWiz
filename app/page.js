@@ -10,22 +10,6 @@ import useIsLoading from "./hooks/useIsLoading";
 
 export default function Home() {
 
-  // const products = [
-  //   {
-  //     id: 1,
-  //     title: 'Product 1',
-  //     description: 'Description for Product 1',
-  //     price: 19.99,
-  //     imageUrl: 'https://picsum.photos/200/300?random=1'
-  //   },
-  //   {
-  //     id: 2,
-  //     title: 'Product 2',
-  //     description: 'Description for Product 2',
-  //     price: 29.99,
-  //     imageUrl: 'https://picsum.photos/200/300?random=2'
-  //   },
-  // ];
 
 
   const [products, setProducts] = useState([])

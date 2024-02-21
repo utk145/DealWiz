@@ -2,28 +2,36 @@
 
 import { BiLoader } from "react-icons/bi";
 import ProductComponent from "./Product.Component";
-
-
-const products = [
-    {
-        id: 1,
-        title: 'Product 1',
-        description: 'In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before the final copy is available.',
-        price: 2109,
-        imageUrl: 'https://picsum.photos/id/7'
-    },
-    {
-        id: 2,
-        title: 'Product 2',
-        description: 'In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a Lorem ipsum is placeholder text commonly used in the graphic, print, and publish.iam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occioyep.',
-        price: 1999,
-        imageUrl: 'https://picsum.photos/id/29'
-    },
-];
-
+import { useState, useEffect } from "react";
+import { toast } from "react-toastify";
 
 
 export default function SimilarProducts() {
+
+    const [products, setProducts] = useState([]);
+
+    const getRandomProducts = async () => {
+        try {
+    
+            setProducts([]); // just to clear
+            const resp = await fetch("/api/products/get-random");
+            const data = await resp.json();
+            if (data) {
+                setProducts(data);
+                return;
+            };
+            setProducts([]);
+    
+        } catch (error) {
+            toast.error("Something went wrong fetching similar products", { autoClose: 3000 });
+        }
+    }
+
+    useEffect(() => {
+      getRandomProducts()
+    }, [])
+    
+
     return (
         <>
             <div className="">

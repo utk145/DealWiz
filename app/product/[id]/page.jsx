@@ -7,14 +7,6 @@ import MainLayout from "@/app/layouts/MainLayout";
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 
-// const product = {
-//     id: 1,
-//     title: 'Product 1',
-//     description: 'In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before the final copy is available.',
-//     price: 19.99,
-//     imageUrl: 'https://picsum.photos/id/7'
-// };
-
 
 export default function Product({ params }) {
 

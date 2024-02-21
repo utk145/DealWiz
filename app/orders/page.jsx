@@ -8,26 +8,6 @@ import { useUser } from "../context/user"
 import { toast } from "react-toastify"
 import useIsLoading from "../hooks/useIsLoading"
 import { useState, useEffect } from "react"
-// const orders = [
-//     {
-//         id: 1,
-//         stripe_id: "327863294",
-//         name: "Vaali Anasot",
-//         address: "864 Spring St NW, United States",
-//         zipcode: "65134",
-//         city: "nvsland",
-//         country: "Anagreen",
-//         total: 7409,
-//         orderItem: [
-//             {
-//                 id: 1,
-//                 title: 'Product Title',
-//                 imageUrl: 'https://picsum.photos/id/7'
-//             }
-//         ]
-//     }
-// ]
-
 
 
 export default function OrdersPage() {
