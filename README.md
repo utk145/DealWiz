@@ -19,4 +19,11 @@ To run this project locally, follow these steps:
 - Prisma
 
 
+![Untitled video - Made with Clipchamp](https://github.com/utk145/DealWiz/assets/122993091/3a0f8ce6-e558-4a3e-96c2-98080d3a33c7)
+
+![screencapture-localhost-3000-2024-02-22-17_30_45](https://github.com/utk145/DealWiz/assets/122993091/cdf1ccb4-b4e2-4968-93cb-65485e61f1f2)
+![screencapture-localhost-3000-checkout-2024-02-22-17_37_04](https://github.com/utk145/DealWiz/assets/122993091/5e54b6ef-c964-4c44-984f-18716dbe5e57)
+
+
+
 Thanks to JohnWeeksDev.
