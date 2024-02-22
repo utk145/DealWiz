@@ -29,3 +29,6 @@
     rearrange -> files moved, added, deleted etc
     update -> update code (versions, library compatibility)
     ```    
+
+
+- Stripe payment potential issue: https://stripe.com/docs/india-exports    
